@@ -1,0 +1,65 @@
+code,short_description,long_description,category,medicare_national_rate,unbundling_group
+99202,Office o/p new sf 15-29 min,Office or other outpatient visit for the evaluation and management of a new patient straightforward medical decision making,Evaluation & Management,74.15,
+99203,Office o/p new low 30-44 min,Office or other outpatient visit for the evaluation and management of a new patient low level of medical decision making,Evaluation & Management,113.80,
+99204,Office o/p new mod 45-59 min,Office or other outpatient visit for the evaluation and management of a new patient moderate level of medical decision making,Evaluation & Management,169.50,
+99205,Office o/p new hi 60-74 min,Office or other outpatient visit for the evaluation and management of a new patient high level of medical decision making,Evaluation & Management,224.25,
+99211,Office o/p est may not req phys,Office or other outpatient visit for the evaluation and management of an established patient that may not require the presence of a physician,Evaluation & Management,24.12,
+99212,Office o/p est sf 10-19 min,Office or other outpatient visit for the evaluation and management of an established patient straightforward medical decision making,Evaluation & Management,57.85,
+99213,Office o/p est low 20-29 min,Office or other outpatient visit for the evaluation and management of an established patient low level of medical decision making,Evaluation & Management,92.05,
+99214,Office o/p est mod 30-39 min,Office or other outpatient visit for the evaluation and management of an established patient moderate level of medical decision making,Evaluation & Management,131.20,
+99215,Office o/p est hi 40-54 min,Office or other outpatient visit for the evaluation and management of an established patient high level of medical decision making,Evaluation & Management,183.15,
+99281,Emergency dept visit low,Emergency department visit for the evaluation and management of a patient straightforward or low severity,Emergency Department,23.45,
+99282,Emergency dept visit low-mod,Emergency department visit for the evaluation and management of a patient low to moderate severity,Emergency Department,46.80,
+99283,Emergency dept visit mod,Emergency department visit for the evaluation and management of a patient moderate severity,Emergency Department,78.90,
+99284,Emergency dept visit high no threat,Emergency department visit for the evaluation and management of a patient high severity without immediate threat,Emergency Department,136.20,
+99285,Emergency dept visit high threat,Emergency department visit for the evaluation and management of a patient high severity with immediate threat,Emergency Department,201.40,
+80048,Basic metabolic panel,Basic metabolic panel calcium total carbon dioxide chloride creatinine glucose potassium sodium urea nitrogen,Pathology & Laboratory,11.62,BMP_PANEL
+80053,Comprehensive metabolic panel,Comprehensive metabolic panel albumin bilirubin total calcium carbon dioxide chloride creatinine glucose phosphatase alkaline potassium protein total sodium AST ALT urea nitrogen,Pathology & Laboratory,14.53,CMP_PANEL
+80061,Lipid panel,Lipid panel total cholesterol HDL cholesterol triglycerides,Pathology & Laboratory,18.40,LIPID_PANEL
+85025,Complete cbc w/auto diff wbc,Complete blood count automated with automated differential WBC count platelet count RBC count Hgb Hct,Pathology & Laboratory,10.68,CBC_PANEL
+85027,Complete cbc automated,Complete blood count automated without differential,Pathology & Laboratory,8.75,CBC_PANEL
+80076,Hepatic function panel,Hepatic function panel albumin bilirubin total and direct alkaline phosphatase ALT AST total protein,Pathology & Laboratory,11.20,HEPATIC_PANEL
+82040,Assay of serum albumin,Serum albumin quantitative assay,Pathology & Laboratory,5.40,CMP_PANEL
+82247,Assay of bilirubin total,Total serum bilirubin assay,Pathology & Laboratory,5.25,CMP_PANEL
+82565,Assay of creatinine,Serum creatinine measurement,Pathology & Laboratory,6.10,CMP_PANEL
+84132,Assay of serum potassium,Serum potassium quantitative assay,Pathology & Laboratory,5.15,CMP_PANEL
+84295,Assay of serum sodium,Serum sodium quantitative assay,Pathology & Laboratory,5.15,CMP_PANEL
+84460,Alanine amino transferase alt,Alanine aminotransferase (ALT/SGPT) assay,Pathology & Laboratory,5.80,CMP_PANEL
+84450,Aspartate amino transferase ast,Aspartate aminotransferase (AST/SGOT) assay,Pathology & Laboratory,5.80,CMP_PANEL
+82947,Assay glucose blood,Blood glucose assay quantitative,Pathology & Laboratory,4.35,CMP_PANEL
+84520,Assay of urea nitrogen,Blood urea nitrogen (BUN) quantitative assay,Pathology & Laboratory,4.50,CMP_PANEL
+83718,Assay of lipoprotein hdl,Lipoprotein direct measurement high density cholesterol (HDL),Pathology & Laboratory,11.05,LIPID_PANEL
+84478,Assay of triglycerides,Triglycerides quantitative measurement,Pathology & Laboratory,6.30,LIPID_PANEL
+82465,Assay of cholesterol,Total serum cholesterol quantitative assay,Pathology & Laboratory,4.85,LIPID_PANEL
+81000,Urinalysis with microscopy,Urinalysis non-automated with microscopy,Pathology & Laboratory,4.30,
+81002,Urinalysis nonauto w/o scope,Urinalysis non-automated without microscopy,Pathology & Laboratory,3.10,
+81003,Urinalysis automated w/o scope,Urinalysis automated without microscopy,Pathology & Laboratory,2.80,
+71045,Chest x-ray 1 view,Radiologic examination chest single view,Radiology,26.40,
+71046,Chest x-ray 2 views,Radiologic examination chest 2 views,Radiology,35.80,
+70450,Ct head/brain w/o contrast,Computed tomography head or brain without contrast material,Radiology,112.50,
+70460,Ct head/brain w/contrast,Computed tomography head or brain with contrast material,Radiology,165.20,
+70470,Ct head/brain w/o & w/contrast,Computed tomography head or brain without contrast followed by contrast material,Radiology,210.80,
+72148,Mri lumbar spine w/o contrast,Magnetic resonance imaging lumbar spine without contrast material,Radiology,198.40,
+73721,Mri joint lower extremity w/o,Magnetic resonance imaging any joint of lower extremity without contrast material,Radiology,185.60,
+74176,Ct abd & pelvis w/o contrast,Computed tomography abdomen and pelvis without contrast material,Radiology,172.90,
+74177,Ct abd & pelvis w/contrast,Computed tomography abdomen and pelvis with contrast material,Radiology,245.30,
+93000,Electrocardiogram complete,Electrocardiogram routine ECG with at least 12 leads with interpretation and report,Cardiology,15.80,
+93005,Electrocardiogram tracing only,Electrocardiogram tracing only without interpretation and report,Cardiology,8.20,
+93010,Electrocardiogram report only,Electrocardiogram report only with interpretation,Cardiology,7.60,
+93306,Echo transthoracic complete,Echocardiography transthoracic real-time with image documentation 2D with Doppler,Cardiology,218.40,
+96360,Iv infusion hydration initial 31-60m,Intravenous infusion hydration systemic initial 31 minutes to 1 hour,Injections & Infusions,58.70,HYDRATION_BUNDLE
+96361,Iv infusion hydration add-on,Intravenous infusion hydration each additional hour,Injections & Infusions,19.20,HYDRATION_BUNDLE
+96365,Iv infusion therapy initial 1hr,Intravenous infusion for therapy prophylaxis or diagnosis initial up to 1 hour,Injections & Infusions,68.40,IV_INFUSION
+96366,Iv infusion therapy add-on hr,Intravenous infusion for therapy prophylaxis or diagnosis each additional hour,Injections & Infusions,21.50,IV_INFUSION
+96372,Ther/proph/diag inj sc/im,Therapeutic prophylactic or diagnostic injection subcutaneous or intramuscular,Injections & Infusions,14.80,
+96374,Ther/proph/diag inj iv push single,Therapeutic prophylactic or diagnostic injection intravenous push single or initial substance,Injections & Infusions,54.10,IV_PUSH
+96375,Ther/proph/diag inj iv push addl,Therapeutic prophylactic or diagnostic injection intravenous push each additional substance,Injections & Infusions,22.30,IV_PUSH
+12001,Rpr s/e/t/ext 2.5 cm/<,Simple repair of superficial wounds of scalp neck axillae external genitalia trunk and/or extremities 2.5 cm or less,Surgery,118.50,WOUND_REPAIR
+12002,Rpr s/e/t/ext 2.6-7.5 cm,Simple repair of superficial wounds of scalp neck axillae external genitalia trunk and/or extremities 2.6 cm to 7.5 cm,Surgery,142.30,WOUND_REPAIR
+12004,Rpr s/e/t/ext 7.6-12.5 cm,Simple repair of superficial wounds of scalp neck axillae external genitalia trunk and/or extremities 7.6 cm to 12.5 cm,Surgery,178.60,WOUND_REPAIR
+10060,Drainage of skin abscess simple,Incision and drainage of abscess simple or single,Surgery,126.40,
+10061,Drainage of skin abscess complicated,Incision and drainage of abscess complicated or multiple,Surgery,214.80,
+36415,Routine venipuncture,Routine venipuncture routine finger heel or auto puncture capillary blood specimen collection,Pathology & Laboratory,3.00,
+99395,Prev visit est age 18-39,Periodic comprehensive preventive medicine reevaluation and management established patient 18-39 years,Preventive Medicine,128.40,
+99396,Prev visit est age 40-64,Periodic comprehensive preventive medicine reevaluation and management established patient 40-64 years,Preventive Medicine,141.20,
+99397,Prev visit est age 65 & over,Periodic comprehensive preventive medicine reevaluation and management established patient 65 years and over,Preventive Medicine,156.80,
