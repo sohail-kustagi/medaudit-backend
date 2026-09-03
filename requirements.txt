@@ -47,33 +47,4 @@ uvloop==0.22.1
 watchfiles==1.2.0
 websockets==17.1
 
-# ── MedAudit Agent Dependencies (Phase 1 additions) ──────────────────────────
-# Strands Agents SDK (AWS Hackathon requirement)
-strands-agents==1.54.0
-strands-agents-tools==0.8.7
 
-# Jinja2 for appeal letter template generation
-Jinja2==3.1.6
-
-# aiohttp required by Strands internals
-aiohttp==3.14.3
-
-# OpenTelemetry for Strands observability
-opentelemetry-api==1.44.0
-opentelemetry-instrumentation==0.65b0
-opentelemetry-instrumentation-threading==0.65b0
-opentelemetry-sdk==1.44.0
-opentelemetry-semantic-conventions==0.65b0
-
-# MCP (Model Context Protocol) support
-mcp==1.29.1
-
-# Rich terminal output (Strands dependency)
-rich==15.0.0
-
-# Markdown/web scraping utilities (Strands dependencies)
-beautifulsoup4==4.15.0
-markdownify==1.2.3
-
-# SSE support for streaming
-httpx-sse==0.4.3

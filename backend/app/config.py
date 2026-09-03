@@ -47,6 +47,7 @@ class Settings(BaseSettings):
 
     # Agent / Bedrock Settings
     BEDROCK_MODEL_ID: str = Field(default="openai.gpt-oss-120b")
+    LLM_MICROSERVICE_URL: str = Field(default="http://localhost:8001/api/v1/audit")
 
 
 settings = Settings()

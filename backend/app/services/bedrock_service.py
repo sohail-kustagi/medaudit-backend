@@ -5,28 +5,26 @@ Provides `run_bedrock_audit`, the primary LLM audit entrypoint called by
 `agent_dispatcher.py`.
 
 Integration order:
-  1. Delegates to `run_medaudit_agent` (Strands SDK orchestrator).
-     - Mode A: Bedrock Mantle OpenAI-compatible proxy.
-     - Mode B: Native Boto3 Bedrock Runtime.
-  2. If the Strands agent raises (Mode C / no credentials / network error),
+  1. Makes an HTTP POST request to the standalone LLM microservice.
+  2. If the microservice fails (network error / 500 status),
      the caller (`agent_dispatcher._execute_pipeline`) catches the exception
      and falls back to `default_audit_heuristic`.
 """
 
 import logging
+import httpx
 from typing import Dict, Any
 
-from agent.orchestrator import run_medaudit_agent
+from backend.app.config import settings
 
 logger = logging.getLogger(__name__)
 
 
 async def run_bedrock_audit(enriched_bill_dict: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Execute a full LLM-powered audit using the MedAudit Strands agent.
+    Execute a full LLM-powered audit using the remote MedAudit Strands microservice.
 
-    Invokes the Strands Agent SDK orchestrator which:
-      - Uses the dual-provider gateway (Bedrock Mantle proxy or native Bedrock)
+    Sends a POST request to the LLM microservice which:
       - Runs a structured Think → Verify (tools) → Decide reasoning loop
       - Returns a strictly typed JSON decision payload
 
@@ -41,13 +39,20 @@ async def run_bedrock_audit(enriched_bill_dict: Dict[str, Any]) -> Dict[str, Any
                "reasoning": "...", "dispute_letter_markdown": "..."}
 
     Raises:
-        RuntimeError: If no valid credentials are available (triggers heuristic
-                      fallback in agent_dispatcher).
-        Exception:    On model, network, or parsing failures (also triggers
-                      heuristic fallback in agent_dispatcher).
+        Exception: On network failures or non-200 responses (triggers
+                   heuristic fallback in agent_dispatcher).
     """
+    document_id = enriched_bill_dict.get("document_id", "unknown")
     logger.info(
-        "run_bedrock_audit: delegating to Strands agent for document_id=%s",
-        enriched_bill_dict.get("document_id", "unknown"),
+        "run_bedrock_audit: delegating to LLM Microservice at %s for document_id=%s",
+        settings.LLM_MICROSERVICE_URL,
+        document_id,
     )
-    return await run_medaudit_agent(enriched_bill_dict)
+    
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        response = await client.post(
+            settings.LLM_MICROSERVICE_URL,
+            json=enriched_bill_dict
+        )
+        response.raise_for_status()
+        return response.json()
