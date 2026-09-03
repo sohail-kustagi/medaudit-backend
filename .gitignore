@@ -54,7 +54,6 @@ htmlcov/
 .DS_Store
 
 # Untracked modules and scripts
-frontend/
 medaudit-frontend/
 infrastructure/
 scripts/
