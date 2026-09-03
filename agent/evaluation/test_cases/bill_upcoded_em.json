@@ -1,0 +1,52 @@
+{
+  "document_id": "eval-upcoded-001",
+  "patient": {
+    "name": "Robert Davis",
+    "dob": "1962-07-11",
+    "policy_id": "POL-BCBS-3372",
+    "account_number": "ACC-009981",
+    "address": "17 Oak Avenue, Columbus, OH 43215"
+  },
+  "provider": {
+    "name": "Metro Urgent Care Center",
+    "npi": "9876543210",
+    "address": "200 Emergency Drive, Columbus, OH 43216"
+  },
+  "statement_date": "2026-08-20",
+  "total_billed": 875.00,
+  "line_items": [
+    {
+      "line_number": 1,
+      "cpt_code": "99215",
+      "description": "Office outpatient visit, high complexity decision-making, 40-54 min",
+      "units": 1,
+      "billed_amount": 750.00,
+      "date_of_service": "2026-08-19",
+      "standard_description": "Office or other outpatient visit, high medical decision making complexity",
+      "medicare_national_rate": 171.24,
+      "price_disparity_ratio": 4.38,
+      "unbundling_group": null,
+      "is_covered": true,
+      "requires_preauth": false,
+      "coinsurance_rate": 0.20,
+      "policy_notes": "Level 5 visit subject to post-service audit"
+    },
+    {
+      "line_number": 2,
+      "cpt_code": "70450",
+      "description": "CT scan head/brain without contrast",
+      "units": 1,
+      "billed_amount": 125.00,
+      "date_of_service": "2026-08-19",
+      "standard_description": "Computed tomography, head or brain; without contrast material",
+      "medicare_national_rate": 98.31,
+      "price_disparity_ratio": 1.27,
+      "unbundling_group": null,
+      "is_covered": true,
+      "requires_preauth": true,
+      "coinsurance_rate": 0.30,
+      "policy_notes": "CT Scan requires prior authorization unless emergency"
+    }
+  ],
+  "insurance_plan_id": "BCBS_STANDARD"
+}

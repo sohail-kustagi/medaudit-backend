@@ -46,7 +46,7 @@ class Settings(BaseSettings):
     ALLOW_MOCK_AUTH: bool = Field(default=True)
 
     # Agent / Bedrock Settings
-    BEDROCK_MODEL_ID: str = Field(default="us.anthropic.claude-3-5-sonnet-20241022-v2:0")
+    BEDROCK_MODEL_ID: str = Field(default="openai.gpt-oss-120b")
 
 
 settings = Settings()

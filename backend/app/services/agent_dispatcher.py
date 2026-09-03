@@ -11,6 +11,7 @@ from backend.app.services.textract_service import textract_service
 from backend.app.pipelines.structuring import structure_bill
 from backend.app.pipelines.enrichment import enrich_bill
 from backend.app.schemas.bill import EnrichedBill
+from backend.app.services.bedrock_service import run_bedrock_audit
 
 logger = logging.getLogger(__name__)
 
@@ -161,7 +162,11 @@ async def _execute_pipeline(
         if custom_agent_fn:
             decision = await custom_agent_fn(enriched.model_dump())
         else:
-            decision = default_audit_heuristic(enriched)
+            try:
+                decision = await run_bedrock_audit(enriched.model_dump())
+            except Exception as e:
+                logger.error(f"Bedrock audit failed, falling back to heuristic: {e}")
+                decision = default_audit_heuristic(enriched)
 
         # 6. Adjudicate Result
         if decision.get("status") == "disputed":

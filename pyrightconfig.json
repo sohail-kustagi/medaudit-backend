@@ -1,0 +1,11 @@
+{
+  "include": [
+    "backend",
+    "agent"
+  ],
+  "extraPaths": [
+    "."
+  ],
+  "venvPath": ".",
+  "venv": ".venv"
+}
