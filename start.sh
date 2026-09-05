@@ -164,83 +164,95 @@ start_services() {
   # ── 1. LLM Microservice ──────────────────────────────────────────────────
   log "Starting LLM Microservice..."
 
-  if ! [[ -d "$LLM_DIR" ]]; then
-    err "medaudit-LLM not found at $LLM_DIR"
-    err "Clone it: git clone https://github.com/sohail-kustagi/medaudit-LLM.git $(dirname "$SCRIPT_DIR")/medaudit-LLM"
-    exit 1
+  if is_running "$LLM_PID"; then
+    warn "LLM Microservice is already running (pid $(cat "$LLM_PID")). Skipping."
+  else
+    if ! [[ -d "$LLM_DIR" ]]; then
+      err "medaudit-LLM not found at $LLM_DIR"
+      err "Clone it: git clone https://github.com/sohail-kustagi/medaudit-LLM.git $(dirname "$SCRIPT_DIR")/medaudit-LLM"
+      exit 1
+    fi
+
+    if ! [[ -d "$LLM_DIR/.venv" ]]; then
+      log "Creating LLM virtualenv..."
+      python3 -m venv "$LLM_DIR/.venv"
+      "$LLM_DIR/.venv/bin/pip" install -q -r "$LLM_DIR/requirements.txt"
+    fi
+
+    {
+      echo "════════════════════════════════════"
+      echo " LLM Microservice — $(date)"
+      echo "════════════════════════════════════"
+    } > "$LLM_LOG"
+
+    (
+      cd "$LLM_DIR"
+      # shellcheck disable=SC2086
+      "$LLM_DIR/.venv/bin/uvicorn" main:app \
+        --host 0.0.0.0 \
+        --port 8001 \
+        --log-level info \
+        >> "$LLM_LOG" 2>&1
+    ) &
+    echo $! > "$LLM_PID"
+    ok "LLM process started (pid $(cat "$LLM_PID"))"
   fi
-
-  if ! [[ -d "$LLM_DIR/.venv" ]]; then
-    log "Creating LLM virtualenv..."
-    python3 -m venv "$LLM_DIR/.venv"
-    "$LLM_DIR/.venv/bin/pip" install -q -r "$LLM_DIR/requirements.txt"
-  fi
-
-  {
-    echo "════════════════════════════════════"
-    echo " LLM Microservice — $(date)"
-    echo "════════════════════════════════════"
-  } > "$LLM_LOG"
-
-  (
-    cd "$LLM_DIR"
-    # shellcheck disable=SC2086
-    "$LLM_DIR/.venv/bin/uvicorn" main:app \
-      --host 0.0.0.0 \
-      --port 8001 \
-      --log-level info \
-      >> "$LLM_LOG" 2>&1
-  ) &
-  echo $! > "$LLM_PID"
-  ok "LLM process started (pid $(cat "$LLM_PID"))"
 
   # ── 2. Backend API ───────────────────────────────────────────────────────
   log "Starting Backend API..."
 
-  if ! [[ -d "$BACKEND_DIR/.venv" ]]; then
-    log "Creating Backend virtualenv..."
-    python3 -m venv "$BACKEND_DIR/.venv"
-    "$BACKEND_DIR/.venv/bin/pip" install -q -r "$BACKEND_DIR/requirements.txt"
+  if is_running "$BACKEND_PID"; then
+    warn "Backend API is already running (pid $(cat "$BACKEND_PID")). Skipping."
+  else
+    if ! [[ -d "$BACKEND_DIR/.venv" ]]; then
+      log "Creating Backend virtualenv..."
+      python3 -m venv "$BACKEND_DIR/.venv"
+      "$BACKEND_DIR/.venv/bin/pip" install -q -r "$BACKEND_DIR/requirements.txt"
+    fi
+
+    {
+      echo "════════════════════════════════════"
+      echo " Backend API — $(date)"
+      echo "════════════════════════════════════"
+    } > "$BACKEND_LOG"
+
+    (
+      cd "$BACKEND_DIR"
+      "$BACKEND_DIR/.venv/bin/uvicorn" backend.app.main:app \
+        --host 0.0.0.0 \
+        --port 8000 \
+        --log-level info \
+        >> "$BACKEND_LOG" 2>&1
+    ) &
+    echo $! > "$BACKEND_PID"
+    ok "Backend process started (pid $(cat "$BACKEND_PID"))"
   fi
-
-  {
-    echo "════════════════════════════════════"
-    echo " Backend API — $(date)"
-    echo "════════════════════════════════════"
-  } > "$BACKEND_LOG"
-
-  (
-    cd "$BACKEND_DIR"
-    "$BACKEND_DIR/.venv/bin/uvicorn" backend.app.main:app \
-      --host 0.0.0.0 \
-      --port 8000 \
-      --log-level info \
-      >> "$BACKEND_LOG" 2>&1
-  ) &
-  echo $! > "$BACKEND_PID"
-  ok "Backend process started (pid $(cat "$BACKEND_PID"))"
 
   # ── 3. Frontend Dev Server ───────────────────────────────────────────────
   log "Starting Frontend Dev Server..."
 
-  if ! [[ -d "$FRONTEND_DIR/node_modules" ]]; then
-    log "Installing frontend dependencies (npm install)..."
-    npm --prefix "$FRONTEND_DIR" install --silent
+  if is_running "$FRONTEND_PID"; then
+    warn "Frontend Dev Server is already running (pid $(cat "$FRONTEND_PID")). Skipping."
+  else
+    if ! [[ -d "$FRONTEND_DIR/node_modules" ]]; then
+      log "Installing frontend dependencies (npm install)..."
+      npm --prefix "$FRONTEND_DIR" install --silent
+    fi
+
+    {
+      echo "════════════════════════════════════"
+      echo " Frontend Dev — $(date)"
+      echo "════════════════════════════════════"
+    } > "$FRONTEND_LOG"
+
+    (
+      cd "$FRONTEND_DIR"
+      npm run dev -- --port 3000 \
+        >> "$FRONTEND_LOG" 2>&1
+    ) &
+    echo $! > "$FRONTEND_PID"
+    ok "Frontend process started (pid $(cat "$FRONTEND_PID"))"
   fi
-
-  {
-    echo "════════════════════════════════════"
-    echo " Frontend Dev — $(date)"
-    echo "════════════════════════════════════"
-  } > "$FRONTEND_LOG"
-
-  (
-    cd "$FRONTEND_DIR"
-    npm run dev -- --port 3000 \
-      >> "$FRONTEND_LOG" 2>&1
-  ) &
-  echo $! > "$FRONTEND_PID"
-  ok "Frontend process started (pid $(cat "$FRONTEND_PID"))"
 
   # ── Health checks ────────────────────────────────────────────────────────
   echo ""
